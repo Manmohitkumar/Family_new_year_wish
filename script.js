@@ -387,3 +387,67 @@ function createSceneTimelines() {
                 const words = text.trim().split(/\s+/);
                 if (words.length > 1) {
                     const wrap = document.createElement('div'); wrap.className = 'word-wrap';
+                    wrap.style.display = 'inline-block';
+                    wrap.style.whiteSpace = 'nowrap';
+                    card.innerHTML = '';
+                    words.forEach(w => { const span = document.createElement('span'); span.textContent = w + ' '; span.style.opacity = 0; wrap.appendChild(span); });
+                    card.appendChild(wrap);
+                    tl.to(wrap.querySelectorAll('span'), { opacity: 1, duration: 0.9, stagger: 0.26, ease: 'power1.out' });
+                }
+                tl.to(card, { filter: 'blur(0px)', duration: 1.1 });
+                break;
+            case '8':
+                tl.add(() => { gsap.to(card.querySelectorAll('.spark'), { rotation: 360, duration: 3, repeat: -1, ease: 'linear' }); });
+                tl.from(card, { y: 20, opacity: 0, duration: 1.1 });
+                break;
+            case '9':
+                tl.from(card.querySelectorAll('.emoji'), { y: -12, duration: 0.8, ease: 'power2.out', stagger: 0.08 });
+                tl.add(() => { gsap.to(sc, { backgroundPosition: '40% 60%', duration: 6, ease: 'sine.inOut' }); });
+                break;
+            case '10':
+                tl.to(card.querySelectorAll('.heart'), { scale: 1.08, duration: 0.9, yoyo: true, repeat: 1, ease: 'sine.inOut' });
+                tl.to(sc, { boxShadow: 'inset 0 0 120px rgba(220,140,90,0.06)', duration: 1.2 }, '<');
+                break;
+            case '11':
+                tl.add(() => { spawnBurst(innerWidth * 0.5, innerHeight * 0.35, 30); }, '>-0.1');
+                tl.from(card.querySelectorAll('.emoji'), { rotation: -4, duration: 0.6, yoyo: true, repeat: 2 });
+                break;
+            case '12':
+                tl.to(card, { scale: 1.06, duration: 3.2, ease: 'power1.out' });
+                break;
+            case '13':
+                tl.to(card, { boxShadow: '0 0 80px rgba(255,210,120,0.08)', duration: 1.2 });
+                tl.add(() => { spawnBurst(innerWidth * 0.5, innerHeight * 0.8, 24); }, '>-0.6');
+                break;
+            case '14':
+                tl.from(card.querySelectorAll('.pray'), { opacity: 0, y: 10, duration: 1.2, stagger: 0.06 });
+                tl.add(() => { createSparkles(sc, 8, 1.2); });
+                break;
+            case '15':
+                tl.to(card.querySelectorAll('.emoji'), { rotation: 8, duration: 1.6, yoyo: true, repeat: 1, ease: 'sine.inOut' });
+                tl.to(document.body, { backgroundPosition: '50% 40%', duration: 4, ease: 'sine.inOut' }, '<');
+                break;
+            case '16':
+                tl.to(card.querySelectorAll('.emoji'), { opacity: 1, y: 0, duration: 0.7, stagger: 0.36, ease: 'power2.out' });
+                tl.add(() => { gsap.to(card.querySelectorAll('.emoji.sway'), { rotation: 3, yoyo: true, repeat: 3, duration: 1.2, ease: 'sine.inOut' }); });
+                break;
+            case '17':
+                tl.to(card.querySelectorAll('.heart'), { scale: 1.06, duration: 1.6, repeat: 1, yoyo: true });
+                tl.add(() => { createSparkles(sc, 10, 1.4); });
+                break;
+            case '18':
+                tl.to(card, { scale: 1.02, duration: 1.1 });
+                tl.add(() => { const btn = card.querySelector('button'); if (btn) gsap.to(btn, { boxShadow: '0 12px 40px rgba(255,230,160,0.08)', repeat: -1, yoyo: true, duration: 1.6 }); });
+                break;
+            default:
+                break;
+        }
+
+        // final big reveal handling if scene has class final-reveal
+        if (sc.classList.contains('final-reveal')) {
+            tl.add(() => { const cx = innerWidth / 2, cy = innerHeight / 2; spawnBurst(cx * 0.4, cy * 0.6, 22); spawnBurst(cx * 0.6, cy * 0.5, 330); createSparkles(sc, 28, 1.8); }, '>-0.2');
+        }
+
+        sc._tl = tl;
+    });
+}
