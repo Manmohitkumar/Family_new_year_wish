@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Happy New Year — A Wish</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <div class="bg-forest" aria-hidden="true"></div>
+    <div id="app" class="wrapper" aria-live="polite">
+        <main class="scroller">
+            <section class="scene" data-scene="1">
+                <div class="card">
+                    <h1>Hey… 👋</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="2">
+                <div class="card">
+                    <h1>Wait a second.</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="3">
+                <div class="card">
+                    <h1>Before this year ends…</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="4">
+                <div class="card">
+                    <h1>I just want to say something…</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="5">
+                <div class="card">
+                    <h1>I’m grateful for you all.</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="6">
+                <div class="card">
+                    <h1>Happy New Year 🎆<br><span class="sub">Welcome 2026 ✨</span></h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="7">
+                <div class="card">
+                    <h1>No matter how busy life gets…</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="8">
+                <div class="card">
+                    <h1>Family is always home.</h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="9">
+                <div class="card">
+                    <h1>Thank you for the love…<br><span class="sub">the support…</span><br><span class="sub">and the
+                            memories.</span></h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="10">
+                <div class="card">
+                    <h1>May this year bring us<br><span class="sub">health, peace, and togetherness.</span></h1>
+                </div>
+            </section>
+
+            <section class="scene" data-scene="11">
+                <div class="card">
+                    <h1>One last thing…</h1>
+                    <button class="reveal-btn" aria-label="Reveal final message">One last thing…</button>
+                </div>
+            </section>
+
+            <section class="scene final-reveal" data-scene="final">
+                <div class="card final">
+                    <h1>I’m lucky to have you.<br><span class="sub">Happy New Year, family.</span></h1>
+                </div>
+            </section>
+        </main>
+
+        <!-- Memories Section (after final reveal) -->
+        <section class="memories" id="memories">
+            <div class="memory" data-memory="1" data-src="images/memory1.jpg">
+                <div class="overlay"></div>
+                <div class="caption">A quiet evening</div>
+            </div>
+            <div class="memory" data-memory="2" data-src="images/memory2.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Small moments</div>
+            </div>
+            <div class="memory" data-memory="3" data-src="images/memory3.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Laughter together</div>
+            </div>
+            <div class="memory" data-memory="4" data-src="images/memory4.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Shared meals</div>
+            </div>
+            <div class="memory" data-memory="5" data-src="images/memory5.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Walks in the park</div>
+            </div>
+            <div class="memory" data-memory="6" data-src="images/memory6.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Sunset skies</div>
+            </div>
+            <div class="memory" data-memory="7" data-src="images/memory7.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Little celebrations</div>
+            </div>
+            <div class="memory" data-memory="8" data-src="images/memory8.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Quiet mornings</div>
+            </div>
+            <div class="memory" data-memory="9" data-src="images/memory9.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Warm hugs</div>
+            </div>
+            <div class="memory" data-memory="10" data-src="images/memory10.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Road trips</div>
+            </div>
+            <div class="memory" data-memory="11" data-src="images/memory11.jpg">
+                <div class="overlay"></div>
+                <div class="caption">Old traditions</div>
+            </div>
+            <div class="memory" data-memory="12" data-src="images/memory12.jpg">
+                <div class="overlay"></div>
+                <div class="caption">A moment to breathe</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Audio consent prompt -->
+    <div id="audio-prompt" role="dialog" aria-modal="true" aria-label="Play music?">
+        <div class="prompt-card">
+            <p>Would you like to play the family song while you view this?</p>
+            <div class="prompt-actions">
+                <button id="prompt-yes">Yes</button>
+                <button id="prompt-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memories overlay layer (sits above the Three.js canvas) -->
+    <div id="memories-layer" class="memories-layer" aria-hidden="true"></div>
+    <canvas id="fireworks"></canvas>
+    <audio id="song" src="family-vibe-378378.mp3" preload="metadata"></audio>
+    <button id="audio-toggle" aria-label="Play song" title="Play song">▶</button>
+    <div id="cursor" aria-hidden="true">
+        <div class="inner"></div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+</html>
